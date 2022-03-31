@@ -5,6 +5,7 @@ import com.razal.intensappback.domain.Skill;
 import com.razal.intensappback.exception.custom.CandidateAlreadyHasSKillException;
 import com.razal.intensappback.exception.custom.CandidateNotFoundException;
 import com.razal.intensappback.exception.custom.SkillNameAlreadyExistsException;
+import com.razal.intensappback.exception.custom.SkillNotFoundException;
 import com.razal.intensappback.repository.CandidateRepository;
 import com.razal.intensappback.repository.SkillRepository;
 import com.razal.intensappback.service.CandidateService;
@@ -46,7 +47,7 @@ public class CandidateServiceImpl implements CandidateService {
         return candidateRepository.save(candidate);
     }
 
-    //Pre nego sto dodam novi skill kandidatu proveri da li ga kandidat vec ima
+    //Pre nego sto dodam novi skill kandidatu proveri da li ga kandidat vec ima,znaci moram da uzmem sve skilove tog kandidata
     //Ako ga nema,pre nego sto ga dodam kandidatu,proveri da li on vec postoji u tabeli skills
     //Ako postoji vrati mu taj u suprotnom pravi novi
     @Override
@@ -103,11 +104,13 @@ public class CandidateServiceImpl implements CandidateService {
     public Candidate removeSkillFromCandidate(Candidate candidate, Long skillId) {
         //isto update
         Skill skill = skillRepository.findById(skillId).orElse(null);
-        //if skill null..
-        candidate.getSkills().remove(skill);
-        /*Iterator<Skill> i = skills.iterator();
-        while ()*/
-        return candidateRepository.save(candidate);
+        Candidate foundCandidate = candidateRepository.findById(candidate.getId()).get();
+        if(skill != null){
+            foundCandidate.getSkills().remove(skill);
+            return candidateRepository.save(foundCandidate);
+        }
+        throw new SkillNotFoundException("Skill with provided id: "+skillId+" doesnt exist!");
+
     }
 
     @Override

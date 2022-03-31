@@ -63,7 +63,7 @@ public class CandidateResource {
         );
     }
     @PutMapping("/removeSkillFromCandidate/{id}")
-    public ResponseEntity<CustomHttpResponse> removeSKill(@RequestBody @Valid Candidate candidate,@PathVariable Long id){
+    public ResponseEntity<CustomHttpResponse> removeSKill(@RequestBody Candidate candidate,@PathVariable Long id){
         return ResponseEntity.ok(
                 CustomHttpResponse.builder()
                         .timeStamp(now())
