@@ -12,9 +12,9 @@ public interface CandidateService {
 
     List<Skill> addSkills(List<Skill> skills);
 
-    Candidate updateCandidateWithSkill(Candidate candidate);
+    Candidate updateCandidateWithSkill(Candidate candidate,Skill skill);
 
-    Candidate removeSkillFromCandidate(Candidate candidate,Long skillId);
+    Candidate removeSkillFromCandidate(Candidate candidate,Skill skill);
 
     Boolean removeCandidate(Long id);
 

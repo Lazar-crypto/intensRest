@@ -2,6 +2,7 @@ package com.razal.intensappback.resource;
 
 import com.razal.intensappback.domain.Candidate;
 import com.razal.intensappback.domain.Skill;
+import com.razal.intensappback.request.RequestWrapper;
 import com.razal.intensappback.response.CustomHttpResponse;
 import com.razal.intensappback.service.CandidateService;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class CandidateResource {
                 CustomHttpResponse.builder()
                         .timeStamp(now())
                         .data(Map.of("candidate", service.addCandidate(candidate)))
-                        .msg("Candidate added")
+                        .msg("Candidate: "+candidate.getName()+" added")
                         .status(CREATED)
                         .statusCode(CREATED.value())
                         .build()
@@ -51,24 +52,28 @@ public class CandidateResource {
         );
     }
     @PutMapping("/updateCandidateSkills")
-    public ResponseEntity<CustomHttpResponse> updateCandidateWithSkill(@RequestBody @Valid Candidate candidate){
+    public ResponseEntity<CustomHttpResponse> updateCandidateWithSkill(@RequestBody RequestWrapper wrapper){
+        Candidate candidate = wrapper.getCandidate();
+        Skill skill = wrapper.getSkill();
         return ResponseEntity.ok(
                 CustomHttpResponse.builder()
                         .timeStamp(now())
-                        .data(Map.of("candidate",service.updateCandidateWithSkill(candidate)))
-                        .msg("Updated candidate with a new skill")
+                        .data(Map.of("candidate",service.updateCandidateWithSkill(candidate,skill)))
+                        .msg("Updated candidate: "+candidate.getName()+" with a new skills")
                         .status(CREATED)
                         .statusCode(CREATED.value())
                         .build()
         );
     }
-    @PutMapping("/removeSkillFromCandidate/{id}")
-    public ResponseEntity<CustomHttpResponse> removeSKill(@RequestBody Candidate candidate,@PathVariable Long id){
+    @PutMapping("/removeSkillFromCandidate")
+    public ResponseEntity<CustomHttpResponse> removeSKill(@RequestBody RequestWrapper wrapper){
+        Candidate candidate = wrapper.getCandidate();
+        Skill skill = wrapper.getSkill();
         return ResponseEntity.ok(
                 CustomHttpResponse.builder()
                         .timeStamp(now())
-                        .data(Map.of("candidate",service.removeSkillFromCandidate(candidate,id)))
-                        .msg("Removed skill from candidate")
+                        .data(Map.of("candidate",service.removeSkillFromCandidate(candidate,skill)))
+                        .msg("Removed skill: "+skill.getName() +" from candidate: "+ candidate.getName())
                         .status(CREATED)
                         .statusCode(CREATED.value())
                         .build()

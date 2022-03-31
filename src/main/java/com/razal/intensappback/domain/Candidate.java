@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static javax.persistence.CascadeType.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
