@@ -4,6 +4,7 @@ import com.razal.intensappback.domain.Candidate;
 import com.razal.intensappback.domain.Skill;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CandidateService {
 
@@ -19,7 +20,7 @@ public interface CandidateService {
 
     Candidate searchCandidateByName(String name);
 
-    List<Candidate> searchAllCandidatesWithGivenSkills(List<Long> skillsId);
+    Set<Candidate> searchAllCandidatesWithGivenSkills(List<Long> skillsId);
 
 
 }

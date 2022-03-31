@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static java.lang.Boolean.TRUE;
 
@@ -124,18 +123,18 @@ public class CandidateServiceImpl implements CandidateService {
     public Candidate searchCandidateByName(String name) {
         log.info("Getting candidate with the name: {}",name);
         Candidate candidate = candidateRepository.findByName(name);
-        //if null..
+        if(candidate == null)
+            throw  new CandidateNotFoundException("Candidate with provided name: "+name+" doesnt exist");
         return candidate;
     }
 
     @Override
-    public List<Candidate> searchAllCandidatesWithGivenSkills(List<Long> skillsIds) {
+    public Set<Candidate> searchAllCandidatesWithGivenSkills(List<Long> skillsIds) {
         List<Candidate> candidates = new ArrayList<>();
-
-        /*for (Long id:skillsIds) {
+        for(Long id : skillsIds){
             Skill skill = skillRepository.findById(id).get();
             candidates.addAll(skill.getCandidates());
-        }*/
-        return  candidates;
+        }
+        return  new HashSet<>(candidates);
     }
 }
