@@ -89,7 +89,6 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public Candidate removeSkillFromCandidate(Candidate candidate, Skill skill) {
-        //moze da se desi da taj kandidat ni nema taj skill
         //isto update
         if(skill != null){
             candidate.getSkills().remove(skill);
@@ -121,5 +120,10 @@ public class CandidateServiceImpl implements CandidateService {
             candidates.addAll(skill.getCandidates());
         }
         return  new HashSet<>(candidates);
+    }
+
+    @Override
+    public List<Candidate> getAllCandidates() {
+        return candidateRepository.findAll();
     }
 }

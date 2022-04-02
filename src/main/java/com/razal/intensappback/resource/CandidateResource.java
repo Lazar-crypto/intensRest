@@ -114,5 +114,18 @@ public class CandidateResource {
                         .build()
         );
     }
+    @GetMapping("/all")
+    public ResponseEntity<CustomHttpResponse> getAllCandidates(){
+        return ResponseEntity.ok(
+                CustomHttpResponse.builder()
+                        .timeStamp(now())
+                        .data(Map.of("candidates",service.getAllCandidates()))
+                        .msg("All candidates retrieved")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
 
 }

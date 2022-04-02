@@ -22,5 +22,7 @@ public interface CandidateService {
 
     Set<Candidate> searchAllCandidatesWithGivenSkills(List<Long> skillsId);
 
+    List<Candidate> getAllCandidates();
+
 
 }
