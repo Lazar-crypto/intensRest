@@ -9,15 +9,12 @@ import com.razal.intensappback.exception.custom.SkillNotFoundException;
 import com.razal.intensappback.repository.CandidateRepository;
 import com.razal.intensappback.repository.SkillRepository;
 import com.razal.intensappback.service.CandidateService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.*;
 

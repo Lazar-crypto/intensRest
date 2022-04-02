@@ -11,7 +11,6 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -64,7 +63,7 @@ class CandidateServiceImplTest {
         Method privateMethodGetSkill = service.getClass().getDeclaredMethod("getSkill", Skill.class);
         privateMethodGetSkill.setAccessible(true);
 
-        Mockito.when(skillRepository.findByName(Mockito.anyString())).thenReturn(skill);
+        when(skillRepository.findByName(Mockito.anyString())).thenReturn(skill);
         Skill foundSKill = (Skill) privateMethodGetSkill.invoke(service,skill);
         assertThat(foundSKill.getName()).isEqualTo(skill.getName());
     }
