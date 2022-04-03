@@ -50,7 +50,7 @@ public class CandidateResource {
                         .build()
         );
     }
-    @PutMapping("/updateCandidateSkills")
+    @PutMapping("/updateCandidateSkill")
     public ResponseEntity<CustomHttpResponse> updateCandidateWithSkill(@RequestBody RequestWrapper wrapper){
         Candidate candidate = wrapper.getCandidate();
         Skill skill = wrapper.getSkill();
