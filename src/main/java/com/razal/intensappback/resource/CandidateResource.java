@@ -102,6 +102,7 @@ public class CandidateResource {
                         .build()
         );
     }
+    //vrv mi nece trebati
     @GetMapping("/skills/{skillsIds}")
     public ResponseEntity<CustomHttpResponse> searchCandidatesWithSkills(@PathVariable List<Long> skillsIds){
         return ResponseEntity.ok(

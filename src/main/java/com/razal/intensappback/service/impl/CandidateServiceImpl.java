@@ -45,6 +45,7 @@ public class CandidateServiceImpl implements CandidateService {
         List<Skill> skills = new ArrayList<>();
         for(Skill skill : newSkills){
             Skill s = getSkill(skill);
+            log.info("Returning skill: "+skill);
             skills.add(s);
         }
         return skills;
@@ -59,8 +60,7 @@ public class CandidateServiceImpl implements CandidateService {
     //Proveri da li kandidat vec ima skill koji hoce da mu se dodeli
     @Override
     public Candidate updateCandidateWithSkill(Candidate candidate,Skill skill) {
-        log.info("Updating candidate: {} with new skill",candidate.getName());
-        if(skill == null || skill.getName() == null)
+        if(skill == null || skill.getName() == null || skill.getName().isEmpty())
             throw new SkillNotFoundException("You must provide name for the skill");
 
         List<Skill> skills = candidate.getSkills();
@@ -72,6 +72,7 @@ public class CandidateServiceImpl implements CandidateService {
         skills = addSkillsToCandidate(skills);
         candidate.setSkills(skills);
 
+        log.info("Updating candidate: {} with new skill",candidate.getName());
         return candidateRepository.save(candidate);
     }
 
